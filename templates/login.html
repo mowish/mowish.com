@@ -1,0 +1,16 @@
+
+{% if request.session.loggedin_id %}
+    Logged in as: {{ request.session.loggedin_email }}
+    <a href="{% url app.views.user_logout %}">Logout</a>
+{% else %}
+    {% if failed %}
+        Login failed.
+    {% endif %}
+    <form action="{% url app.views.user_login %}" method="POST">
+        <div>
+                E-mail&nbsp<input id="cemail" type="text" name="email" size="15"/>
+                Password&nbsp<input id="cpassword" type="password" name="password" size="15"/>
+                <input class="submit" type="submit" value="Login"/>
+        </div>     
+    </form>
+{% endif %}

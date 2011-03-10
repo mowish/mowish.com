@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load mowish_tags %}
+
+{% block content %}  
+
+    <a id="cover" href="{{ movie.posters.1.image.url }}"><img src="{{ movie.posters.2.image.url }}" alt=""/></a>
+    {{ movie.name }}&nbsp({{ movie.released }})<br>
+    Runtime: {{ movie.runtime }}<br>
+    Tagline: {{ movie.tagline }}<br>
+    Rating: {{ movie.rating }}<br>
+    Overview: {{ movie.overview }}<br>
+    Trailer: <a href="{{ movie.trailer }}">{{ movie.trailer }}</a><br>
+    Genre:
+    {% for genre in movie.genres %}
+        {{ genre.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    <br>
+
+    {% regroup movie.cast|dictsort:"cast_id" by job as cast_list %}
+    {% for cast in cast_list %}
+        <b>{{ cast.grouper }}</b>
+        <br>
+        {% for person in cast.list %}
+            <a href="{% site_url %}/person/{{person.id}}/{{person.name|slug}}">{{ person.name }}</a>{% if person.character %} ({{ person.character }}){% endif %}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        <br>    
+    {% endfor %}    
+    
+    <div id="posters">
+        {% regroup movie.posters by image.id as poster_list %}
+        {% for poster in poster_list %}
+            <a href="{{ poster.list.1.image.url }}">
+                <img src="{{ poster.list.3.image.url }}" alt=""/>
+            </a>        
+        {% endfor %}
+    </div>
+    
+    <div id="backdrops">
+        {% regroup movie.backdrops by image.id as backdrop_list %}
+        {% for backdrop in backdrop_list %}
+            <a href="{{ backdrop.list.1.image.url }}">
+                <img src="{{ backdrop.list.2.image.url }}" alt=""/>
+            </a>        
+        {% endfor %}
+    </div>
+
+{% endblock content %}

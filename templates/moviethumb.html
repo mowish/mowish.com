@@ -1,0 +1,12 @@
+
+{% load mowish_tags %}
+
+<a href="{% site_url %}/movie/{{item.id}}/{{item.name|slug}}">
+    {{item.name}}
+</a>
+{% if item.released %}
+    &nbsp({{item.released|cut:4}})<br>
+{% endif %}
+<a href="{% site_url %}/movie/{{item.id}}/{{item.name|slug}}">
+    <img src="{{ item.posters.3.image.url }}" onerror="imgerror(this)"/>
+</a>

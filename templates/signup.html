@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}  
+
+    <script>
+        $(document).ready(function(){
+            //$("#signup_form").validate();
+        });
+    </script>    
+
+    <form class="cmxform" action="{% url app.views.user_add %}" method="POST" id="signup_form" >
+    
+        <div>
+                <div>
+                    E-Mail<em>*</em>&nbsp<input id="cemail" name="email" type="text" size="20"  class="required email" /><br>
+                    Password<em>*</em>&nbsp<input id="cpassword" name="password" type="password" size="20" class="required" minlength="4" /><br>
+                    Confirm password<em>*</em>&nbsp<input id="cconfirm_password" name="confirm_password" type="password" size="20" class="required" minlength="4" />
+                </div>
+                <div style="align: left">                
+                    <input class="submit" type="submit" value="Sign up"/>
+                </div>      
+        </div>  
+        
+    </form>
+
+{% endblock content %}

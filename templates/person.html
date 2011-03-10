@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load mowish_tags %}
+
+{% block content %}  
+
+    <a id="profile_img" href="{{ person.profile.0.image.url }}"><img src="{{ person.profile.1.image.url }}" alt=""/></a>
+    {{ person.name }}&nbsp({{ person.birthday }})<br>
+    Birthplace: {{ person.birthplace }}<br>
+    Also known as: {{ person.also_known_as }}<br>
+    Biography: {{ person.biography }}<br>
+    <p>Filmography:</p>
+
+    {% regroup person.filmography|dictsort:"cast_id" by job as film_list %}
+    {% for film in film_list %}
+        <b>{{ film.grouper }}</b>
+        <br>
+        {% for movie in film.list %}
+            <a href="{% site_url %}/movie/{{movie.id}}/{{movie.name|slug}}">{{ movie.name }}</a>{% if not forloop.last %}<br>{% endif %}
+        {% endfor %}
+        <br>    
+    {% endfor %}
+
+    <div id="profile">
+        {% regroup person.profile by image.id as profile_list %}
+        {% for profile in profile_list %}
+            <a href="{{ profile.list.0.image.url }}">
+                <img src="{{ profile.list.2.image.url }}" alt=""/>
+            </a>        
+        {% endfor %}
+    </div>
+
+{% endblock content %}

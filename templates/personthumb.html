@@ -1,0 +1,15 @@
+
+{% load mowish_tags %}
+<a href="{% site_url %}/person/{{item.id}}/{{item.name|slug}}">
+    <img src="{{ item.profile.2.image.url }}" onerror="imgerror(this)"/>
+</a>
+{{item.name}}
+<br>
+<a href="{% site_url %}/movies/from/{{item.id}}/{{item.name|slug}}">
+    movies
+</a>
+&nbsp;
+<a href="{% site_url %}/person/{{item.id}}/{{item.name|slug}}">
+    profile
+</a>
+

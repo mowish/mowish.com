@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}  
+
+
+<div>
+    <div style="float: left; margin: 5px;">
+        <b>Genres</b>
+        {% for item in gup %}
+            <br>{{item.genre}}: {{item.weight}}
+        {% endfor %}
+    </div>
+    
+    <div style="float: left; margin: 5px;">
+        <b>Actors</b>
+        {% for item in aup %}       
+            <br>{{item.actor}}: {{item.weight}}
+        {% endfor %}
+    </div>
+
+    <div style="float: left; margin: 5px;">
+        <b>Directors</b>
+        {% for item in dup %}
+            <br>{{item.director}}: {{item.weight}}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

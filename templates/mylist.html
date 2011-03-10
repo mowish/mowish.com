@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load mowish_tags %}
+
+{% block content %}  
+
+    {% for item in data %}
+
+        <div class="span-3">
+        
+            {% include "moviethumb.html" %}
+            
+            <br>  
+            <a href="{% site_url %}/movie/{{item.id}}/rate/good">good</a>
+            &nbsp|&nbsp
+            <a href="{% site_url %}/movie/{{item.id}}/rate/bad">bad</a>
+            &nbsp|&nbsp
+            <a href="{% site_url %}/movie/{{item.id}}/status/removed">remove</a>
+
+        </div>
+        
+    {% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load mowish_tags %}
+
+{% block content %}  
+
+    Search result based on '{{ search_term }}':<br>
+    <input type="hidden" id="search_term" value="{{ search_term }}"/>
+    <input type="hidden" id="search_type" value="{{ search_type }}"/>
+    {% if data %}
+        {% include "thumblist.html" %}
+    {% else %}
+        Nothing found.
+    {% endif %}
+    
+{% endblock content %}

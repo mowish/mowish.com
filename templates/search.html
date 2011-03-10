@@ -1,0 +1,6 @@
+<form action="{% url app.views.movies_list %}" method="get">
+    <input type="radio" name="search_type" value="movie" checked /> movie
+    <input type="radio" name="search_type" value="person" /> person       
+    <input type="text" name="search_term" size="15"/>
+    <input type="submit" value="Search" />
+</form>

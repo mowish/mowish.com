@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}  
+
+        {% ifequal status "emailsent" %}
+                Thanks for registering - please check your email for the activation instructions.
+        {% endifequal %}
+        {% ifequal status "activated" %}
+                Your user is activated! Please log in.
+        {% endifequal %}
+        {% ifequal status "expired" %}
+                Your registration has expired - please register again.
+        {% endifequal %}
+
+
+{% endblock content %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+{% load mowish_tags %}
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link href="{% site_url %}/site_media/css/blueprint/screen.css" type="text/css" media="all" rel="stylesheet" />
+    <!--[if IE]><link href="{% site_url %}/site_media/css/blueprint/ie.css" type="text/css" media="all" rel="stylesheet" /><![endif]-->
+    <link href="{% site_url %}/site_media/css/custom.css" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% site_url %}/site_media/css/jquery.lightbox-0.5.css" type="text/css" media="all" rel="stylesheet" />
+    <script src="{% site_url %}/site_media/js/jquery-1.4.2.js" type="text/javascript" ></script>
+    <script src="{% site_url %}/site_media/js/jquery.lightbox-0.5.js" type="text/javascript" ></script>
+    <script src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js" type="text/javascript" ></script>
+    <script src="{% site_url %}/site_media/js/custom.js" type="text/javascript" ></script>
+    <title>mowish.com</title>
+
+<script>
+
+    $(document).ready(function() {
+        $("#toplist").load("/movies/toplist/");
+        $.get("/movies/recommendations/", {"search_term": $("#search_term").val()}, function(data) {
+            $("#recommendations").html(data);
+        });  
+        lightbox_params = {
+            imageLoading: '{% site_url %}/site_media/images/lightbox-ico-loading.gif',
+            imageBtnClose: '{% site_url %}/site_media/images/lightbox-btn-close.gif',
+            imageBtnPrev: '{% site_url %}/site_media/images/lightbox-btn-prev.gif',
+            imageBtnNext: '{% site_url %}/site_media/images/lightbox-btn-next.gif',
+            imageBlank: '{% site_url %}/site_media/images/lightbox-blank.gif' 
+        }
+        
+        $('#cover').lightBox(lightbox_params);
+        $('#posters a').lightBox(lightbox_params);
+        $('#backdrops a').lightBox(lightbox_params);
+        $('#profile_img').lightBox(lightbox_params);
+        $('#profile a').lightBox(lightbox_params);
+    })
+
+
+    function imgerror(source){
+            source.src = "{% site_url %}/site_media/images/noimage.png";
+            source.onerror = "";
+            return true;
+    }
+
+
+</script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="span-4">left</div>
+        <div class="span-16">
+        
+            <div class="span-16 prepend-top last boxed">
+                <a href="{% site_url %}">MOWISH.COM</a>
+            </div>
+            <div class="span-16 prepend-top last">
+                <a href='{% url signup %}'>Signup</a>
+            </div>
+
+
+            <div class="span-11 prepend-top">    
+                {% include 'login.html' %}
+            </div>
+            <div class="span-5 last prepend-top">
+                {% include 'search.html' %}
+            </div>        
+
+   
+            {% if request.session.loggedin_id %}      
+                <div class="span-16 prepend-top last">
+                    {% include 'usermenu.html' %}
+                </div>
+            {% endif %}
+            
+            
+            <div class="span-16 prepend-top last">
+                {% block content %}
+                    <div class="span-4">
+                        search
+                    </div>
+                    <div class="span-4">
+                        pick
+                    </div>
+                    <div class="span-4">
+                        watch 
+                    </div>
+                    <div class="span-4 last">
+                        check 
+                    </div>
+                {% endblock content %}
+            </div>        
+            
+            <div id="recommendations" class="span-13 prepend-top">
+                <img src="{% site_url %}/site_media/images/ajax_progress.gif"/>
+            </div>
+            
+            <div id="toplist" class="span-3 prepend-top last">
+                <img src="{% site_url %}/site_media/images/ajax_progress.gif"/>
+            </div>
+
+        </div>
+        <div class="span-4 last">right</div>    
+    </div>
+
+</body>

@@ -1,0 +1,8 @@
+
+{% load mowish_tags %}
+
+{% if request.session.loggedin_id or loggedin_id %}
+    <a href="{% site_url %}/movie/add?tmdb_id={{item.id}}&imdb_id={{item.imdb_id}}&title={{item.name}}&released={{item.released}}">+</a>
+{% else %}
+    &nbsp<a href='{% url signup %}'>+</a>
+{% endif %}

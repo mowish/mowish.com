@@ -1,0 +1,20 @@
+
+
+Thank you for registering on mowish.com!
+
+
+Please activate your account by visiting the url below:
+
+%(site_url)s/user/activate/%(activationkey)s
+
+Your user credentials for reference:
+
+user: %(email)s
+password: %(password)s
+
+Enjoy your time on mowish.com!
+
+
+mowish.com team
+info@mowish.com
+
